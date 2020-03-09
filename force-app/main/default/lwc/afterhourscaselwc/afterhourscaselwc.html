@@ -1,0 +1,21 @@
+<template>
+    <template if:true={afterHoursShow}>
+        <div style="background-color:white">
+            <lightning-record-form
+                             object-api-name="Case"
+                             record-type-id={recordTypeId}
+                             record-id={recordId}
+                             oncancel={onCancel}
+                             onsuccess={handleSuccess}
+                             onsubmit={handleSubmit}
+                             fields={fields}
+                             columns="2">
+            <lightning-messages ></lightning-messages>
+        </lightning-record-form>
+        </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+    </template>
+</template>

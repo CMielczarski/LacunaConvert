@@ -1,0 +1,948 @@
+<template>
+    <template if:true={Spinner}>
+        <div id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </template>
+    <template if:true={showAccounts}>
+        <div role="dialog"  class="slds-modal slds-fade-in-open slds-scrollable" style="width: 800px; margin:0 auto" >
+            <header class="slds-modal__footer" style="width: 800px">
+                    <button class="slds-button slds-button_neutral" onclick={hideAccountModal}>Close</button>
+                </header>
+            <div class="slds-modal__content slds-p-around--medium slds-scrollable">
+                <div class="slds-scrollable">
+                    <table>
+                       <thead>
+                            <tr class="slds-text-title--caps">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                   <span title="Name">Name</span> 
+                                 </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                   <span title="Name">Facility Number</span> 
+                                 </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                  <span title="Name">Address</span> 
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                  <span title="Name">City</span> 
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                  <span title="Name">State</span> 
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                  <span title="Name">Zip</span> 
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={facilityList} for:item="add"> 
+                                    <tr key={add.Id}>
+                                        <th scope="row">
+                                            <lightning-input type="checkbox" name={add.Name} text={add.Id} onchange={setFacility}></lightning-input>
+                                        </th>
+                                        <th scope="row">
+                                            <div ><lightning-formatted-text value={add.Name}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate" title={add.Facility_Number__c}><lightning-formatted-text value={add.Facility_Number__c}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate" title={add.ShippingStreet}><lightning-formatted-text value={add.ShippingStreet}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div title={add.ShippingCity}><lightning-formatted-text value={add.ShippingCity}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div title={add.ShippingState}><lightning-formatted-text value={add.ShippingState}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div title={add.ShippingPostalCode}><lightning-formatted-text value={add.ShippingPostalCode}></lightning-formatted-text></div>
+                                            <br/>
+                                        </th>
+                                    </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    </div>
+                <footer class="slds-modal__footer" style="width: 800px">
+                    <lightning-button class="slds-button slds-button_neutral" onclick={hideAccountModal}>Close</lightning-button>
+                </footer>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </template>
+   
+    <template if:true={showFacilityList2}>
+        <div role="dialog"  class="slds-modal slds-fade-in-open slds-scrollable" style="width: 800px; margin:0 auto" >
+            <header class="slds-modal__footer" style="width: 800px">
+                    <lightning-button class="slds-button slds-button_neutral" onclick={hideAccountModal2}>Close</lightning-button>
+                </header>
+            <div class="slds-modal__content slds-p-around--medium slds-scrollable">
+                <div class="slds-scrollable">
+                    <table>
+                        <thead>
+                            <tr class="slds-text-title--caps">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                   <span title="Name">Name</span> 
+                                 </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                   <span title="Name">Facility Number</span> 
+                                 </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                  <span title="Name">Address</span>  
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                  <span title="Name">City</span> 
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                  <span title="Name">State</span> 
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row" >
+                                  <span title="Name">Zip</span> 
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={facilityList2} for:item="add"> 
+                                    <tr key={add.Id}>
+                                        <th scope="row">
+                                            <lightning-input type="checkbox" name={add.Name} text={add.Id} onchange={setFacility2}></lightning-input>
+                                        </th>
+                                        <th scope="row">
+                                            <div><lightning-formatted-text value={add.Name}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate"><lightning-formatted-text value={add.Facility_Number__c}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate"><lightning-formatted-text value={add.ShippingStreet}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div><lightning-formatted-text value={add.ShippingCity}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div><lightning-formatted-text value={add.ShippingState}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div><lightning-formatted-text value={add.ShippingPostalCode}></lightning-formatted-text></div>
+                                            <br/>
+                                        </th>
+                                    </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    </div>
+                <footer class="slds-modal__footer" style="width: 800px">
+                    <button class="slds-button slds-button_neutral" onclick={hideAccountModal2}>Close</button>
+                </footer>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </template>
+   
+    <template if:true={showContentModal}>
+        <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open" style="width: 100%">
+            <div class="slds-modal__container" style="width: 100%">
+                <footer class="slds-modal__footer" style="width: 100%">
+                    <table>
+                        <thead>
+                            <tr class="slds-text-title--caps">
+                                <th scope="row" >
+                                        <span title="Name">Title</span>
+                                </th>
+                                <th scope="row" >
+                                        <span title="Name">File Type</span>
+                                </th>
+                                <th scope="row" >
+                                        <span class="slds-assistive-text">Sort</span>
+                                        <span title="Name">Content Size</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={fileList} for:item="add"> 
+                                    <tr key={add.Id}>
+                                        <th scope="row">
+                                            <div class="slds-truncate" style="width:350px"><lightning-formatted-url value={add.itemURL} label={add.Title} target="_blank"></lightning-formatted-url></div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate"><lightning-formatted-text value={add.FileType}></lightning-formatted-text></div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate"><lightning-formatted-text value={add.ContentSize}></lightning-formatted-text></div>
+                                        </th>
+                                    </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <lightning-button class="slds-button slds-button_neutral" onclick={hideContentModal}>Close</lightning-button>
+                </footer>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </template>
+    <template if:true={formReady}>
+    <div id="OverlapBS" style="background-color:white">
+    <div id="caseForm">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col" id="formCol">
+                <label for="cNumber"><span style="font-weight: bold">Case Number: </span></label>
+                <lightning-formatted-text value={activeCase.CaseNumber}></lightning-formatted-text>
+                <br/>
+                <lightning-record-edit-form
+                                          record-id={activeCase.Id}
+                                          object-api-name="Case"
+                                          id="editForm1"
+                                          record-type-id={activeCase.RecordTypeId}>
+                    <lightning-messages ></lightning-messages>
+                    <template if:true={showCaseContent}>
+                        <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                            <tr>
+                                <td>
+                                    <lightning-input-field field-name="Type" value={activeCase.Type} name="inputSelectType" required onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                                <td>
+                                    <lightning-input-field field-name="Subtype__c" value={activeCase.Subtype__c} name="inputSelectSubType" required onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                                <td>
+                                    <lightning-input-field field-name="Call_Type__c" value={activeCase.Call_Type__c} name="inputSelectCallType" required onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                            <tr>
+                                <td>
+                                    <label for="subject">Subject</label>
+                                    <br/>
+                                    <lightning-formatted-text value={activeCase.Subject}></lightning-formatted-text>
+                                </td>
+                                <td>
+                                    <template if:true={isEdit}>
+                                        <lightning-input-field field-name="Status" name="caseStatus" onchange={handleFormInputChange}></lightning-input-field>
+                                    </template>
+                                </td>
+                            </tr>
+                        </table>
+                    </template>
+                </lightning-record-edit-form>
+                <br/>
+                <lightning-record-edit-form
+                                          record-id={activeContact.Id}
+                                          object-api-name="Contact"
+                                          id="editForm2"
+                                          record-type-id={activeContact.RecordTypeId}>
+                        <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                            <tr >
+                                <td >
+                                    <lightning-input-field field-name="FirstName" value={activeContact.FirstName} name="fName" onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                                <td>
+                                    <template if:false={isEdit}>
+                                        <lightning-input-field field-name="LastName" name="lName" required value="" onchange={handleFormInputChange}></lightning-input-field>
+                                    </template>
+                                    <template if:true={isEdit}>
+                                        <lightning-input-field field-name="LastName" name="lName" value={activeContact.LastName} onchange={handleFormInputChange}></lightning-input-field>
+                                    </template>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="phoneTypePicklist">Phone Number</label>
+                                    <br/>
+                                    <div style="width: 100px;">
+                                        <select class="slds-select" name="contactPhoneSelect" onchange={handleFormInputChange} >
+                                            <option value="Phone">Phone</option>
+                                            <option value="Home Phone">Home Phone</option>
+                                            <option value="Mobile">Mobile</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                <div style="width: 200px;">
+                                        <lightning-input type="text" value={currentPhone} placeholder={activeContact.Phone} name="cPhone" onblur={handleFormInputChange}></lightning-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <lightning-input-field field-name="Extension__c" value={activeContact.Extension__c} name="phoneExt" disabled={disableExtension} onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                            <tr >
+                                <td >
+                                    <div >
+                                        <lightning-input-field field-name="MailingStreet" name="conStreet" value={activeContact.MailingStreet} onchange={handleFormInputChange}></lightning-input-field>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                            <tr>
+                                <td>
+                                    <lightning-input-field field-name="MailingCity" name="conCity" value={activeContact.MailingCity} onchange={handleFormInputChange} ></lightning-input-field>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td >
+                                    State<br/>
+                                    <lightning-input-field field-name="Case_State__c" name="conState" value={activeContact.MailingState} onchange={handleFormInputChange} variant="label-hidden"></lightning-input-field>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                                <td>
+                                    <lightning-input-field field-name="MailingPostalCode" name="conZip" value={activeContact.MailingPostalCode} onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                            <tr>
+                                <td>
+                                    <div class="customRequired">Email Status<br/></div>
+                                    <select class="slds-select" name="contactEmailStatus" onchange={handleFormInputChange} >
+                                        <option value="--None--">--None--</option>
+                                        <option value="Valid">Valid</option>
+                                        <option value="Refused">Refused</option>
+                                        <option value="No email">No email</option>
+                                    </select>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                 </td>
+                                <td>
+                                    <lightning-input-field field-name="Email" value={activeContact.Email} disabled={requireEmail} name="inputEmail" onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                                <td>
+                                    <lightning-formatted-text value="Facility"></lightning-formatted-text>
+                                    <lightning-input type="text" value={chosenFacility} name="inputConFac"></lightning-input>
+                                </td>
+                                <td>
+                                    <lightning-button label="Search" onclick={searchFacilties}></lightning-button>
+                                </td>
+                            </tr>
+                        </table>
+                </lightning-record-edit-form>
+                <br/>
+                <br/>
+                <span style="Font-weight:bold;"><lightning-formatted-text value="Patient Information" ></lightning-formatted-text>&nbsp;<template if:false={showPatientInfo}><lightning-button label="+" onclick={showHidePatient}></lightning-button></template></span><span style="Font-weight:bold"><template if:true={showPatientInfo}><lightning-button label="-" onclick={showHidePatient}></lightning-button></template></span>
+                <template if:true={showPatientInfo}>
+                    <br/>
+                    <br/>
+                    <lightning-button label="Copy Contact Information" onclick={copyContactToPatient}></lightning-button>
+                    <br/>
+                    <br/>
+                    <div style="border-bottom: 2px solid black; border-top: 2px solid black">
+                        <br/>
+                    <template if:true={showPatientInfo}>
+                        <lightning-record-edit-form
+                                                  record-id={activePatient.Id}
+                                                  object-api-name="Patient_NEW__c"
+                                                  id="editForm5"
+                                                  record-type-id={activePatient.RecordTypeId}>
+                            <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                                <tr>
+                                    <td>
+                                        <lightning-input-field field-name="First_Name__c" value={activePatient.First_Name__c} name="pfName" onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    <td>
+                                        <lightning-input-field field-name="Middle_Initial__c" value={activePatient.Middle_Initial__c} name="pfMidName" onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    <td>
+                                        <template if:false={isEdit}>
+                                            <lightning-input-field field-name="Last_Name__c" class="customRequired" required={referralRequired} value={patientLastName} name="plName" onchange={handleFormInputChange}></lightning-input-field>
+                                        </template>
+                                        <template if:true={isEdit}>
+                                            <lightning-input-field field-name="Last_Name__c" name="plNameEdit" onchange={handleFormInputChange} value={activePatient.Last_Name__c}></lightning-input-field>
+                                        </template>
+                                    </td>
+                                    <td>
+                                        <lightning-input-field field-name="Suffix__c" value={activePatient.Suffix__c} name="pfSufName" onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table class="smallMarginLeft smallMarginTop smallMarginBottom" style="width:500px">
+                                <tr >
+                                    <td >
+                                        <lightning-formatted-text value="Date of Birth"></lightning-formatted-text><br/>
+                                        <div style="width: 200px"><lightning-input type="date" display-date-picker="true" value={activePatient.Date_of_Birth__c} format="MM/dd/yyyy" name="InputDOB" onblur={handleFormInputChange}></lightning-input></div> <lightning-button label="Calculate Age" onclick={getAgeCalc}></lightning-button>
+                                    </td>
+                                    <td >
+                                        <label for="age">Age</label>
+                                        <br/>
+                                        <lightning-formatted-text value={patientAge}></lightning-formatted-text>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                                <tr >
+                                    <td >
+                                        <lightning-input-field field-name="Sex__c" value={activePatient.Sex__c} name="pSex" onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    <td >
+                                        <lightning-input-field field-name="E_mail__c" value={activePatient.E_mail__c} name="pEmail" onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    <td >
+                                        <lightning-input-field field-name="Phone__c" name="pPhone" value={activePatient.Phone__c} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                                <tr >
+                                    <td >
+                                        <div >
+                                            <lightning-input-field field-name="Street__c" value={activePatient.Street__c} name="ptStreet" onchange={handleFormInputChange}></lightning-input-field>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                                <tr >
+                                    <td >
+                                        <lightning-input-field field-name="City__c" value={activePatient.City__c} name="ptCity" onchange={handleFormInputChange} ></lightning-input-field>
+                                    </td>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <td >
+                                        <lightning-input-field field-name="State__c" value={activePatient.State__c} name="ptState" onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <td >
+                                        <lightning-input-field field-name="Postal_Code__c" value={activePatient.Postal_Code__c} name="ptZip" onchange={handleFormInputChange} ></lightning-input-field>
+                                    </td>
+                                </tr>
+                            </table>
+                        </lightning-record-edit-form>
+                    </template>
+                    <br/>
+                    <template if:true={showAssessmentContent}>
+                        <lightning-record-edit-form
+                                                  record-id={activeAssessment.Id}
+                                                  object-api-name="Assessment__c"
+                                                  id="editForm6"
+                                                  record-type-id={activeAssessment.RecordTypeId}>   
+                            <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                                <tr>
+                                    <td >
+                                        <div >
+                                            <lightning-formatted-text value="Preferred Facility" ></lightning-formatted-text><br/>
+                                            <lightning-input type="text" value={preferredFacilityName} name="assessPrefFac"></lightning-input>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <br/>
+                                        <lightning-button label="Search" onclick={searchFacilties2}></lightning-button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </lightning-record-edit-form>
+                    </template>
+                    <br/>
+                    <template if:true={showPatientInfo}>
+                        <lightning-record-edit-form
+                                                  record-id={activePatient.Id}
+                                                  object-api-name="Patient_NEW__c"
+                                                  id="editForm7"
+                                                  record-type-id={activePatient.RecordTypeId}>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <lightning-input-field field-name="Status__c" value={activePatient.Status__c} name="inputPtStatus" class="customRequired" required={referralRequired} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <td>
+                                        <lightning-input-field field-name="Status_Detail__c" value={activePatient.Status_Detail__c} class="customRequired" name="inputPtStatusDetail" required={referralRequired} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    <td>
+                                        <lightning-input-field field-name="Consent_for_Callback__c" value={activePatient.Consent_for_Callback__c} class="customRequired" name="inputPtConsent" required={consentRequired} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <lightning-input-field field-name="Next_Call_Date__c" value={activePatient.Next_Call_Date__c} name="pNextCall" onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    
+                                    <td>
+                                        <lightning-input-field field-name="Lead_Lost_Date__c" value={activePatient.Lead_Lost_Date__c} name="pLeadLost" onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                </tr>
+                            </table>
+                        </lightning-record-edit-form>
+                    </template>
+                    <br/>
+                    <table>
+                        <tr>
+                            <td>
+                                <lightning-file-upload label="Attachments"
+                                    name="fileUploader"
+                                    accept={accept}
+                                    record-id={activeCase.Id}
+                                    onuploadfinished={handleUploadFinished}></lightning-file-upload>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <thead>
+                    <tr class="slds-text-title--caps">
+                                <th scope="row">
+                                    <span title="Name">Title</span>
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row">
+                                    <span title="Name">Content Type</span>
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row">
+                                    <span title="Name">Created Date</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <template for:each={attachmentItems} for:item="add"> 
+                                    <tr key={add.Id}>
+                                        <th scope="row">
+                                            <div class="slds-truncate" ><lightning-formatted-text value={add.Title}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate" style="width:100px"><lightning-formatted-text value={add.FileType}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate"><lightning-formatted-date-time value={add.CreatedDate} format="MM/dd/yyyy"></lightning-formatted-date-time></div>
+                                        </th>
+                                    </tr>
+                            </template>
+                            </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+                    </div>
+                </template>
+                <br/>
+                <br/>
+                <span style="font-weight: bold;">Payor Information &nbsp;<template if:false={showPayorInfo}><lightning-button label="+" onclick={showHidePayor}></lightning-button></template><template if:true={showPayorInfo}><lightning-button label="-" onclick={showHidePayor}></lightning-button></template></span>
+                <template if:true={showAssessmentContent}>   
+                    <lightning-record-edit-form
+                                record-id={activeAssessment.Id}
+                                object-api-name="Assessment__c"
+                                id="editForm9"
+                                record-type-id={activeAssessment.RecordTypeId}>
+                        <template if:true={showPayorInfo}>
+                            <br/>
+                            <div style="border-bottom: 2px solid black; border-top: 2px solid black">
+                            <br/>
+                            <table>
+                                <span style="font-weight:bold"><lightning-formatted-text value="Primary Payor"></lightning-formatted-text></span>
+                                <tr>
+                                    <td>
+                                        <lightning-input-field name="payorName" class="customRequired" field-name="Payor__c" required={payorRequired} value={activeAssessment.Payor__c} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    <td>
+                                        <lightning-input-field name="payorMemberId" class="customRequired" field-name="Member_ID__c" required={payorRequired} value={activeAssessment.Member_ID__c} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    <td>
+                                        <lightning-input-field name="payorSubscriberName" class="customRequired" field-name="Subscriber_Name__c" required={payorRequired} value={activeAssessment.Subscriber_Name__c} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                </tr>
+                                <br/>
+                                <span style="font-weight:bold"><lightning-formatted-text value="Secondary Payor"></lightning-formatted-text></span>
+                                <tr>
+                                    <td>
+                                        <lightning-input-field name="payorName2" field-name="Secondary_Payor__c" value={activeAssessment.Secondary_Payor__c} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                   
+                                    <td>
+                                        <lightning-input-field name="payorMemberId2" field-name="Secondary_Member_ID__c" value={activeAssessment.Secondary_Member_ID__c} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                    <td>
+                                        <lightning-input-field name="payorSubscriberName2" field-name="Secondary_Subscriber_Name__c" value={activeAssessment.Secondary_Subscriber_Name__c} onchange={handleFormInputChange}></lightning-input-field>
+                                    </td>
+                                </tr>
+                            </table>
+                                <br/>
+                            </div>
+                        </template>
+                    </lightning-record-edit-form>
+                </template>
+                <br/>
+                <lightning-record-edit-form
+                                          record-id={activeCase.Id}
+                                          object-api-name="Case"
+                                          id="editForm3"
+                                          record-type-id={activeCase.RecordTypeId}>
+                    <template if:true={showCaseDetails}>
+                        <table>
+                            <tr>
+                                <td style="width: 200px">
+                                    <span style="color:red">*</span><lightning-formatted-text value="How did caller find Kindred?"></lightning-formatted-text>
+                                    <br/>
+                                    <lightning-input-field field-name="Case_Source__c" name="caseSource" variant="label-hidden" onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                                
+                                <td>
+                                    <lightning-input-field field-name="Origin" name="caseOrigin" onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                                
+                                <td>
+                                    <lightning-record-edit-form
+                                                              record-id={activeAccount.Id}
+                                                              object-api-name="Account"
+                                                              id="editForm4"
+                                                              record-type-id={activeAccount.RecordTypeId}>
+                                        
+                                            <lightning-formatted-text value="Level of Care" class="customRequired"></lightning-formatted-text>
+                                            <br/>
+                                            <select class="slds-select" name="accType" onchange={handleFormInputChange} >
+                                                <option value="--None--">--None--</option>
+                                                <option value="ALF">ALF</option>
+                                                <option value="ARU">ARU</option>
+                                                <option value="CC">CC</option>
+                                                <option value="HH">HH</option>
+                                                <option value="HP">HP</option>
+                                                <option value="IHPC">IHPC</option>
+                                                <option value="IRF">IRF</option>
+                                                <option value="PHCA">PHCA</option>
+                                                <option value="SAU">SAU</option>
+                                                <option value="TCH">TCH</option>
+                                                <option value="TCC/SNF">TCC/SNF</option>
+                                                <option value="Not Applicable">Not Applicable</option>
+                                            </select>
+                                    </lightning-record-edit-form>
+                                </td>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td>
+                                    <lightning-input-field field-name="Website_Ad_Ask__c" name="webAdAsk" onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                                <td>
+                                    <br/>
+                                    <lightning-input-field field-name="TV_Ad_Ask__c" name="tvAdAsk" required onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                                <td>
+                                    <br/>
+                                    <lightning-input-field field-name="Online_Search_Ask__c" name="onlineSearchAsk" required onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
+                            <tr>
+                                <td>
+                                    <lightning-input-field field-name="Case_Notes__c" name="caseDescription" onchange={handleFormInputChange}></lightning-input-field>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br/>
+                                    Description Note History<br/>
+                                    <table>
+                                        <thead>
+                            <tr class="slds-text-title--caps">
+                                <th scope="row">
+                                    <span title="Name">Title</span>
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row">
+                                    <span title="Name">Content</span>
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row">
+                                    <span title="Name">Created Date</span>
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row">
+                                    <span title="Name">Created By</span>
+                                </th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th scope="row">
+                                    <span title="Name">Last Modified</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={caseHistory} for:item="add"> 
+                                    <tr key={add.Id}>
+                                        <th scope="row">
+                                            <div class="slds-truncate" ><lightning-formatted-text value={add.n.Title}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate" style="width:125px"><lightning-formatted-text value={add.n.TextPreview}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate" ><lightning-formatted-date-time value={add.n.CreatedDate} format="MM/dd/yyyy"></lightning-formatted-date-time></div>
+                                        </th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate" ><lightning-formatted-text value={add.userName}></lightning-formatted-text></div>
+                                        </th>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <th scope="row">
+                                            <div class="slds-truncate"><lightning-formatted-date-time value={add.n.LastModifiedDate} format="MM/dd/yyyy hh:mm a z"></lightning-formatted-date-time></div>
+                                        </th>
+                                    </tr>
+                                </template>
+                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </template>
+                </lightning-record-edit-form>
+                <br/>
+                <template if:true={showWebContent}>
+                    <div>
+                        <span style="color:black;font-size: 13px; font-weight:bold">Web Information</span>
+                        <br/>
+                        <lightning-button label="Show/Hide" onclick={showHideWeb}></lightning-button>
+                        <template if:true={showWebInfo}>
+                            <table>
+                                <span>
+                                    <b>Web Name</b> <br/>
+                                    <p style="margin-left: 5px;"><lightning-formatted-text value={activeCase.Web_Last_Name__c}></lightning-formatted-text></p>
+                                </span>
+                                <span>
+                                   <b> Web Address</b> <br/>
+                                    <p style="margin-left: 5px;"><lightning-formatted-text value={activeCase.Web_Street_Address__c}></lightning-formatted-text><br/>
+                                        <lightning-formatted-text value={activeCase.Web_City__c}></lightning-formatted-text>,&nbsp; <lightning-formatted-text value={activeCase.Web_State__c}></lightning-formatted-text>&nbsp; <lightning-formatted-text value={activeCase.Web_Zip_Code__c}></lightning-formatted-text></p>
+                                </span>
+                                <span>
+                                    <b>Web Phone</b><br/>
+                                    <p style="margin-left: 5px;"><lightning-formatted-text value={activeCase.SuppliedPhone}></lightning-formatted-text></p>
+                                </span>
+                                <span>
+                                    <b>Web Email</b><br/>
+                                    <p style="margin-left: 5px;"><lightning-formatted-text value={activeCase.SuppliedEmail}></lightning-formatted-text></p>
+                                </span>
+                            </table>
+                        </template>
+                    </div>
+                </template>
+                <br/>
+                <br/>
+                <br/>
+                <table style="margin-left: auto;margin-right: auto;">
+                    <tr >
+                        <td>
+                            <lightning-button class="slds-m-top_small" variant="brand" name="save" label="Save" onclick={saveRecords}></lightning-button>
+                        </td>
+                        <td>
+                            <span style="color:white">______________</span>
+                        </td>
+                        <td>
+                            <lightning-button class="slds-m-top_small" variant="brand" name="saveClose" label="Save and Close" onclick={saveClose}></lightning-button>
+                        </td>
+                        <td>
+                            <span style="color:white">______________</span>
+                        </td>
+                        <td>
+                            <lightning-button class="slds-m-top_small" variant="brand" name="cancel" label="Cancel" onclick={cancelCase}></lightning-button>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+           
+            <div class="slds-col" id="mapCol" style="width:25%">
+                <div id="mapContainer" style="width:300px">                      
+                <!--<lightning-map
+                    map-markers={mapMarkers}
+                    markers-title="Kindred Facilities"
+                    center={center}>
+                </lightning-map>-->
+                </div>
+                <br/>
+                <div style="color:blue" onmouseover={showLegend} onmouseout={hideLegend}> Show Legend</div>
+                <template if:true={displayLegend}>
+                    <div>
+                        <img src={legendLogo}/>
+                    </div>
+                </template>
+                <br/>
+                <table>
+                    <tr>
+                        <td>
+                            Select Facility Type:
+                            <select class="slds-select" name="inputSelectFacility" onchange={handleFormInputChange} >
+                                <option value="--None--">--None--</option>
+                                <option value="ALF">ALF</option>
+                                <option value="ARU">ARU</option>
+                                <option value="CC">CC</option>
+                                <option value="HH">HH</option>
+                                <option value="HP">HP</option>
+                                <option value="IHPC">IHPC</option>
+                                <option value="IRF">IRF</option>
+                                <option value="PHCA">PHCA</option>
+                                <option value="SAU">SAU</option>
+                                <option value="TCH">TCH</option>
+                                <option value="TCC/SNF">TCC/SNF</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Facilities with Content:
+                        <br/>
+                        <select class="slds-select" name="inputSelectAccount" onchange={handleFormInputChange} disabled={allowContentSearch}>
+                            <template for:each={selAccounts} for:item="acc">
+                                <option value={acc} key={acc.Id}>{acc}</option>
+                            </template>
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <lightning-button label="Get Content" onclick={getContent} disabled={allowContentSearch}></lightning-button>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <div class="slds-scrollable" style="height: 400px;">
+                    <span style="font-size:18px; font-weight: bold">Kindred Facilities</span>
+                <table>
+                    <template for:each={locationDetails} for:item="loc">
+                    <tr style="outline: thin solid" key={loc.accId}>
+                        <td>
+                            <lightning-input type="checkbox" name={loc.title} text={loc.accId} onchange={setPreferredFac}></lightning-input>
+                            <br/>
+                            <template if:true={loc.isALF}>
+                                <img src={alfLogo}/>
+                            </template>
+                            <template if:true={loc.isARU}>
+                                <img src={aruLogo}/>
+                            </template>
+                            <template if:true={loc.isCC}>
+                                <img src={ccLogo}/>
+                            </template>
+                            <template if:true={loc.isHH}>
+                                <img src={hhLogo}/>
+                            </template>
+                            <template if:true={loc.isIHPC}>
+                                <img src={hhLogo}/>
+                            </template>
+                            <template if:true={loc.isHP}>
+                                <img src={hpLogo}/>
+                            </template>
+                            <template if:true={loc.isIRF}>
+                                <img src={irfLogo}/>
+                            </template>
+                            <template if:true={loc.isSAU}>
+                                <img src={sauLogo}/>
+                            </template>
+                            <template if:true={loc.isTCH}>
+                                <img src={tchLogo}/>
+                            </template>
+                            <template if:true={loc.isTCCSNF}>
+                                <img src={tccsnfLogo}/>
+                            </template>
+                        </td>
+                        <td>
+                            <span style="font-weight:bold"><lightning-formatted-url label={loc.title} title={loc.location} onclick={recenterMap}></lightning-formatted-url></span>
+                            <br/>
+                            <lightning-formatted-text value={loc.street}></lightning-formatted-text>
+                            <br/>
+                            <lightning-formatted-text value={loc.city}></lightning-formatted-text>,&nbsp;<lightning-formatted-text value={loc.state}></lightning-formatted-text>&nbsp; <lightning-formatted-text value={loc.zip}></lightning-formatted-text>
+                            <br/>
+                            <span style="font-weight:bold"><lightning-formatted-text value={loc.phone}>&nbsp;&nbsp;&nbsp;&nbsp;</lightning-formatted-text><lightning-formatted-text value={loc.dist}></lightning-formatted-text></span>
+                            <br/>
+                        </td>
+                    </tr>
+                </template>
+                </table>
+                </div>
+            </div>
+            <div class="slds-col" id="articleCol" style="width:25%">
+                <div style = "font-size:14px"><b>Knowledge Center</b></div><br/>
+                <div>
+                    <label style ="font-weight: 400;"><lightning-input type="radio" name="allKnowledgeBase" value="true" change={filterArticles}></lightning-input>All</label>
+                    &nbsp;&nbsp;
+                    <label style ="font-weight: 400;"><lightning-input type="radio" name="kindredKnowledgeBase" change={filterArticles} ></lightning-input>Kindred</label>
+                    &nbsp;&nbsp;
+                    <label style ="font-weight: 400;"><lightning-input type="radio" name="gentivaKnowledgeBase" change={filterArticles}  ></lightning-input>Gentiva</label>
+                </div><br/>
+                <table>
+                    <tr>
+                        <td>
+                            <lightning-input type=text class="form-control" name="articleSearchString" value={articleSearchString}></lightning-input>
+                            &nbsp;    
+                            <lightning-button class ="btn btn-default" label="Go" onclick={searchArticles}></lightning-button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="slds-scrollable" style="height: 250px;">
+                    <div id = "scrollArticle">
+                                    <template for:each={articleList} for:item="article">
+                                        <div class="articleBox" style="border-bottom:1px solid blue" key={article.Id}>
+                                            <b></b>
+                                            <lightning-button title={article.record.Id} label={article.record.Title} onclick={openKnowledge}></lightning-button>
+                                            <br/>
+                                            <lightning-formatted-text class="slds-truncate" value={article.record.How_To_Resolve__c}></lightning-formatted-text>
+                                            <br/>
+                                            <br/>
+                                            </div>
+                                    </template>
+                                </div>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <div style = "font-size:14px; border-top:1px solid black"><b>Lacuna Documentation</b></div><br/>
+                <div class="slds-scrollable" style="height: 450px;">
+                    <div id = "scrollArticle2">
+                                    <template for:each={lacunaFileList} for:item="content">
+                                        <div class="articleBox2" style="border-bottom:1px solid blue" key={content.Id}>
+                                            <b>
+                                                <lightning-button title={content.Id} label={content.Title} onclick={openLibrary}></lightning-button>
+                                            </b>
+                                            <br/>
+                                            <br/>
+                                        </div>
+                                    </template>
+                                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </template>
+</template>

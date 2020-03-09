@@ -1,0 +1,45 @@
+<template>
+    <template if:true={Spinner}>
+        <div id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </template>
+    <div style="background-color:white">
+        <div>
+            <template if:true={showChoice}>
+                <lightning-formatted-text value="Please select the type of case to create"></lightning-formatted-text>
+            <template if:true={showChoice}>
+            <table>
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="row" >
+                            <span title="Name">Case Type:</span> 
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={choiceList} for:item="add">  
+                            <tr key={add.Id}>
+                                <th scope="row">
+                                    <lightning-button name={add.Id} label={add.Name} onclick={openPage}></lightning-button>
+                                </th>
+                            </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+        </template>
+            <template if:true={showGeneral}>
+                <c-lacunainterfacelwc recordtypeid={storeID} ></c-lacunainterfacelwc>
+            </template>
+        
+            <template if:true={showAfterH}>
+                <c-afterhourscaselwc recordtypeid={storeID}></c-afterhourscaselwc>
+            </template>
+        </div>
+        </div>
+</template>
