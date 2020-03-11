@@ -78,7 +78,7 @@ export default class Lacunainterfacelwc extends LightningElement {
     @api showPatientInfo = false;
     @api showPayorInfo = false;
     @api articleTypeFilter = "All";
-    @api articleSearchString;
+    @api articleSearchString = "";
     @api articleList = [];
     @api caseHistory = [];
     @api assessmentHistory = [];
@@ -97,7 +97,7 @@ export default class Lacunainterfacelwc extends LightningElement {
     @api facilityType;
     @api facilitySelectLocked = false;
     @api fileList = [];
-    @api allowContentSearch = false;
+    @api diasbleContentSearch = false;
     @api selAccounts = [];
     @api showContentModal = false;
     @api consentRequired = false;
@@ -127,6 +127,7 @@ export default class Lacunainterfacelwc extends LightningElement {
     @api getAccSearch = false;
    
     connectedCallback(){
+        this.diasbleContentSearch = true;
         this.facilitySelectLocked = true;
         var idCheck = this.recordId;
         this.Spinner = true;
@@ -231,6 +232,7 @@ export default class Lacunainterfacelwc extends LightningElement {
                         this.showPatientInfo = false;
                         this.activePatient.Status__c = "--None--";
                         this.activePatient.Status_Detail__c = "--None--";
+                        this.activePatient.Last_Name__c = "";
                         }
                         console.log('activePatient for Assessment: ' + this.activePatient.Id);
         getNewServerAssessment({"activePatient" : this.activePatient})
@@ -614,7 +616,7 @@ export default class Lacunainterfacelwc extends LightningElement {
             }
       
         showLegend(){
-            this.displayLegend;
+            this.displayLegend = true;
             }
       
         hideLegend(){
@@ -1306,10 +1308,10 @@ export default class Lacunainterfacelwc extends LightningElement {
                                                 }
                                             this.selAccounts = listTemp;
                                             if(listTemp.length > 0){
-                                                this.allowContentSearch = true;
+                                                this.diasbleContentSearch = false;
                                                 }
                                             else{
-                                                this.allowContentSearch = false;
+                                                this.diasbleContentSearch = true;
                                                 }
                                             }
                                             }
@@ -1906,39 +1908,59 @@ export default class Lacunainterfacelwc extends LightningElement {
       
         filterArticles(){
             var arType = event.target.name;
+            var art = this.template.querySelectorAll(".art");
+            
             if(arType === 'Kindred'){
-                component.find("allKnowledgeBase").set("v.value", false);
-                component.find("gentivaKnowledgeBase").set("v.value", false);
+                art.forEach(function(element){
+                    if(element.name === 'allKnowledgeBase'){
+                        element.checked = false;
+                        }
+                    else if(element.name === 'gentivaKnowledgeBase'){
+                        element.checked = false;
+                        }
+                    }, this);
                 }
             else if(arType === 'Gentiva'){
-                component.find("allKnowledgeBase").set("v.value", false);
-                component.find("kindredKnowledgeBase").set("v.value", false);
+                art.forEach(function(element){
+                    if(element.name === 'allKnowledgeBase'){
+                        element.checked = false;
+                        }
+                    else if(element.name === 'kindredKnowledgeBase'){
+                        element.checked = false;
+                        }
+                    }, this);
                 }
             else if(arType === 'All'){
-                component.find("gentivaKnowledgeBase").set("v.value", false);
-                component.find("kindredKnowledgeBase").set("v.value", false);
+                art.forEach(function(element){
+                    if(element.name === 'gentivaKnowledgeBase'){
+                        element.checked = false;
+                        }
+                    else if(element.name === 'kindredKnowledgeBase'){
+                        element.checked = false;
+                        }
+                    }, this);
                 }
             console.log('Radio Value: ' + arType);
             this.articleTypeFilter = arType;
-            helper.findArticles(component);
+            this.findArticles();
             }
       
         searchArticles(){
-            helper.findArticles(component);
+            this.findArticles();
             }
       
         handleUploadFinished(){
             var uploadedFiles = event.getParam("files");
-            helper.showAttachList(component);
+            this.showAttachList();
             alert("Files uploaded");
             }
        
         openKnowledge(){
-            helper.openArticleItem(component, event, helper);
+            this.openArticleItem();
             }
       
         openLibrary(){
-            helper.openLibraryItem(component, event, helper);
+            this.openLibraryItem();
             }
 
         getSelectedContent(){
@@ -1963,7 +1985,7 @@ export default class Lacunainterfacelwc extends LightningElement {
           
             cancelTheCase(){
                 this.Spinner = true;
-                console.log('Cancel Case',state);
+                console.log('Cancel Case');
                 processCancelCase(
                     {
                     "activeCase" : this.activeCase,
@@ -1977,7 +1999,6 @@ export default class Lacunainterfacelwc extends LightningElement {
                         result=>{
                             var repList = result;
                             if(repList === 'Success'){
-                                this.Spinner = false;
                                 window.location.href =  '/lightning/o/Case/list?filterName=Recent&0.source=alohaHeader';
                                 }
                             else{
@@ -2074,11 +2095,8 @@ export default class Lacunainterfacelwc extends LightningElement {
                 }
           
             openArticleItem(){
-                var workspaceAPI = component.find("workspace");
-                var tabID;
                 console.log('Starting Navigation');
-                    var id = event.getSource().get("v.title");
-                    var navService = component.find("navService");
+                    var id = event.target.title;
                     var pageReference = {
                                 type: 'standard__recordPage',
                                     attributes: {
@@ -2087,22 +2105,11 @@ export default class Lacunainterfacelwc extends LightningElement {
                                                 recordId : id
                                                 },
                                     };
-                    workspaceAPI.getFocusedTabInfo().then(function(response) {
-                                    var focusedTabId = response.tabId;
-                                    component.set("v.pageReference", pageReference);
-                                    navService.navigate(pageReference);
-                                    })
-                     .catch(function(error) {
-                                console.log(error);
-                                });
                 }
           
             openLibraryItem(){
-                var workspaceAPI = component.find("workspace");
-                var tabID;
                 console.log('Starting Navigation');
-                    var id = event.getSource().get("v.title");
-                    var navService = component.find("navService");
+                    var id = event.target.title;
                     var pageReference = {
                                 type: 'standard__recordPage',
                                     attributes: {
@@ -2111,14 +2118,6 @@ export default class Lacunainterfacelwc extends LightningElement {
                                                 recordId : id
                                                 },
                                     };
-                    workspaceAPI.getFocusedTabInfo().then(function(response) {
-                                    var focusedTabId = response.tabId;
-                                    component.set("v.pageReference", pageReference);
-                                    navService.navigate(pageReference);
-                                    })
-                     .catch(function(error) {
-                                console.log(error);
-                                });
                 }
           
             checkServerItems(){

@@ -312,10 +312,12 @@
                         <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
                             <tr>
                                 <td>
+                                    <br/>
                                     <lightning-input-field field-name="MailingCity" name="conCity" value={activeContact.MailingCity} onchange={handleFormInputChange} ></lightning-input-field>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </td>
                                 <td >
+                                    <br/>
                                     State<br/>
                                     <lightning-input-field field-name="Case_State__c" name="conState" value={activeContact.MailingState} onchange={handleFormInputChange} variant="label-hidden"></lightning-input-field>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -329,6 +331,8 @@
                         <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
                             <tr>
                                 <td>
+                                    <br/>
+                                    <br/>
                                     <div class="customRequired">Email Status<br/></div>
                                     <select class="slds-select" name="contactEmailStatus" onchange={handleFormInputChange} >
                                         <option value="--None--">--None--</option>
@@ -339,6 +343,7 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                  </td>
                                 <td>
+                                    <br/>
                                     <lightning-input-field field-name="Email" value={activeContact.Email} disabled={requireEmail} name="inputEmail" onchange={handleFormInputChange}></lightning-input-field>
                                 </td>
                                 <td>
@@ -346,6 +351,8 @@
                                     <lightning-input type="text" value={chosenFacility} name="inputConFac"></lightning-input>
                                 </td>
                                 <td>
+                                    <br/>
+                                    <br/>
                                     <lightning-button label="Search" onclick={searchFacilties}></lightning-button>
                                 </td>
                             </tr>
@@ -353,7 +360,7 @@
                 </lightning-record-edit-form>
                 <br/>
                 <br/>
-                <span style="Font-weight:bold;"><lightning-formatted-text value="Patient Information" ></lightning-formatted-text>&nbsp;<template if:false={showPatientInfo}><lightning-button label="+" onclick={showHidePatient}></lightning-button></template></span><span style="Font-weight:bold"><template if:true={showPatientInfo}><lightning-button label="-" onclick={showHidePatient}></lightning-button></template></span>
+                <span style="font-weight:bold;"><lightning-formatted-text value="Patient Information" ></lightning-formatted-text>&nbsp;<template if:false={showPatientInfo}><lightning-button label="+" onclick={showHidePatient}></lightning-button></template></span><span style="Font-weight:bold"><template if:true={showPatientInfo}><lightning-button label="-" onclick={showHidePatient}></lightning-button></template></span>
                 <template if:true={showPatientInfo}>
                     <br/>
                     <br/>
@@ -430,14 +437,17 @@
                             <br/>
                             <table class="smallMarginLeft smallMarginTop smallMarginBottom" >
                                 <tr >
-                                    <td >
+                                    <td ><br/>
                                         <lightning-input-field field-name="City__c" value={activePatient.City__c} name="ptCity" onchange={handleFormInputChange} ></lightning-input-field>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
                                     <td >
+                                        <br/>
                                         <lightning-input-field field-name="State__c" value={activePatient.State__c} name="ptState" onchange={handleFormInputChange}></lightning-input-field>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
                                     <td >
                                         <lightning-input-field field-name="Postal_Code__c" value={activePatient.Postal_Code__c} name="ptZip" onchange={handleFormInputChange} ></lightning-input-field>
                                     </td>
@@ -462,6 +472,7 @@
                                     </td>
                                     <td>
                                         <br/>
+                                        <br/>
                                         <lightning-button label="Search" onclick={searchFacilties2}></lightning-button>
                                     </td>
                                 </tr>
@@ -478,9 +489,11 @@
                             <table>
                                 <tr>
                                     <td>
+                                        <br/>
                                         <lightning-input-field field-name="Status__c" value={activePatient.Status__c} name="inputPtStatus" class="customRequired" required={referralRequired} onchange={handleFormInputChange}></lightning-input-field>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
                                     <td>
                                         <lightning-input-field field-name="Status_Detail__c" value={activePatient.Status_Detail__c} class="customRequired" name="inputPtStatusDetail" required={referralRequired} onchange={handleFormInputChange}></lightning-input-field>
                                     </td>
@@ -520,12 +533,14 @@
                     <tr class="slds-text-title--caps">
                                 <th scope="row">
                                     <span title="Name">Title</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                 </th>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                
                                 <th scope="row">
                                     <span title="Name">Content Type</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                 </th>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                
                                 <th scope="row">
                                     <span title="Name">Created Date</span>
                                 </th>
@@ -536,12 +551,14 @@
                                     <tr key={add.Id}>
                                         <th scope="row">
                                             <div class="slds-truncate" ><lightning-formatted-text value={add.Title}></lightning-formatted-text></div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
                                         </th>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        
                                         <th scope="row">
                                             <div class="slds-truncate" style="width:100px"><lightning-formatted-text value={add.FileType}></lightning-formatted-text></div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
                                         </th>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        
                                         <th scope="row">
                                             <div class="slds-truncate"><lightning-formatted-date-time value={add.CreatedDate} format="MM/dd/yyyy"></lightning-formatted-date-time></div>
                                         </th>
@@ -567,7 +584,11 @@
                             <div style="border-bottom: 2px solid black; border-top: 2px solid black">
                             <br/>
                             <table>
-                                <span style="font-weight:bold"><lightning-formatted-text value="Primary Payor"></lightning-formatted-text></span>
+                                <tr>
+                                    <td colspan="3">
+                                        <span style="font-weight:bold"><lightning-formatted-text value="Primary Payor"></lightning-formatted-text></span>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         <lightning-input-field name="payorName" class="customRequired" field-name="Payor__c" required={payorRequired} value={activeAssessment.Payor__c} onchange={handleFormInputChange}></lightning-input-field>
@@ -576,11 +597,17 @@
                                         <lightning-input-field name="payorMemberId" class="customRequired" field-name="Member_ID__c" required={payorRequired} value={activeAssessment.Member_ID__c} onchange={handleFormInputChange}></lightning-input-field>
                                     </td>
                                     <td>
+                                        <br/>
                                         <lightning-input-field name="payorSubscriberName" class="customRequired" field-name="Subscriber_Name__c" required={payorRequired} value={activeAssessment.Subscriber_Name__c} onchange={handleFormInputChange}></lightning-input-field>
+                                        <br/>
                                     </td>
                                 </tr>
-                                <br/>
-                                <span style="font-weight:bold"><lightning-formatted-text value="Secondary Payor"></lightning-formatted-text></span>
+                                
+                                <tr>
+                                    <td colspan="3">
+                                        <span style="font-weight:bold"><lightning-formatted-text value="Secondary Payor"></lightning-formatted-text></span>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         <lightning-input-field name="payorName2" field-name="Secondary_Payor__c" value={activeAssessment.Secondary_Payor__c} onchange={handleFormInputChange}></lightning-input-field>
@@ -643,9 +670,10 @@
                                                 <option value="Not Applicable">Not Applicable</option>
                                             </select>
                                     </lightning-record-edit-form>
+                                    <br/>
                                 </td>
                             </tr>
-                            <br/>
+                            
                             <tr>
                                 <td>
                                     <lightning-input-field field-name="Website_Ad_Ask__c" name="webAdAsk" onchange={handleFormInputChange}></lightning-input-field>
@@ -823,7 +851,7 @@
                         <td>
                         Facilities with Content:
                         <br/>
-                        <select class="slds-select" name="inputSelectAccount" onchange={handleFormInputChange} disabled={allowContentSearch}>
+                        <select class="slds-select" name="inputSelectAccount" onchange={handleFormInputChange} disabled={diasbleContentSearch}>
                             <template for:each={selAccounts} for:item="acc">
                                 <option value={acc} key={acc.Id}>{acc}</option>
                             </template>
@@ -832,7 +860,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <lightning-button label="Get Content" onclick={getContent} disabled={allowContentSearch}></lightning-button>
+                            <lightning-button label="Get Content" onclick={getContent} disabled={diasbleContentSearch}></lightning-button>
                         </td>
                     </tr>
                 </table>
@@ -894,12 +922,20 @@
             <div class="slds-col" id="articleCol" style="width:25%">
                 <div style = "font-size:14px"><b>Knowledge Center</b></div><br/>
                 <div>
-                    <label style ="font-weight: 400;"><lightning-input type="radio" name="allKnowledgeBase" value="true" change={filterArticles}></lightning-input>All</label>
-                    &nbsp;&nbsp;
-                    <label style ="font-weight: 400;"><lightning-input type="radio" name="kindredKnowledgeBase" change={filterArticles} ></lightning-input>Kindred</label>
-                    &nbsp;&nbsp;
-                    <label style ="font-weight: 400;"><lightning-input type="radio" name="gentivaKnowledgeBase" change={filterArticles}  ></lightning-input>Gentiva</label>
-                </div><br/>
+                    <table>
+                        <tr>
+                            <td>
+                                <label style ="font-weight: 400;"><lightning-input type="radio" name="allKnowledgeBase" value="true" change={filterArticles} class="art"></lightning-input>All</label>
+                            </td>
+                            <td>
+                                <label style ="font-weight: 400;"><lightning-input type="radio" name="kindredKnowledgeBase" change={filterArticles} class="art"></lightning-input>Kindred</label>
+                            </td>
+                            <td>
+                                <label style ="font-weight: 400;"><lightning-input type="radio" name="gentivaKnowledgeBase" change={filterArticles}  class="art"></lightning-input>Gentiva</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 <table>
                     <tr>
                         <td>
