@@ -338,7 +338,7 @@ export default class Lacunainterfacelwc extends LightningElement {
                     try{
                         var desc = this.activeCase.Description;
                         if (desc !== undefined && desc !== null){
-                            component.find("caseDescription").set("v.value", desc);
+                            //component.find("caseDescription").set("v.value", desc);
                             this.activeCase.Case_Notes__c = desc;
                             }
                         }
@@ -390,7 +390,7 @@ export default class Lacunainterfacelwc extends LightningElement {
                                         try{
                                             var eStatus = this.activeContact.Email_Status__c;
                                             if(eStatus !== undefined && eStatus !== null){
-                                                component.find("inputEmailStatus").set("v.value", eStatus);
+                                                //.find("inputEmailStatus").set("v.value", eStatus);
                                                 }
                                             }
                                     catch(err){
@@ -456,32 +456,32 @@ export default class Lacunainterfacelwc extends LightningElement {
                    
                         if(edit === true){
                             if(lastName !== undefined && lastName !== 'temp'){
-                                component.find("plNameEdit").set("v.value", lastName);
+                                //component.find("plNameEdit").set("v.value", lastName);
                                 }
                             }
                     if(lastName === 'temp'){
                         this.showPatientInfo = false;
                         }
                     if(firstName !== undefined){
-                        component.find("pfName").set("v.value", firstName);
+                        //component.find("pfName").set("v.value", firstName);
                         }
                     if(street !== undefined){
-                        component.find("ptStreet").set("v.value", street);
+                        //component.find("ptStreet").set("v.value", street);
                         }
                     if(city !== undefined){
-                        component.find("ptCity").set("v.value", city);
+                        //component.find("ptCity").set("v.value", city);
                         }
                     if(state !== undefined){
-                        component.find("ptState").set("v.value", state);
+                        //component.find("ptState").set("v.value", state);
                         }
                     if(zip !== undefined){
-                        component.find("ptZip").set("v.value", zip);
+                        //component.find("ptZip").set("v.value", zip);
                         }
                     if(email !== undefined){
-                        component.find("pEmail").set("v.value", email);
+                        //component.find("pEmail").set("v.value", email);
                         }
                     if(phone !== undefined){
-                        component.find("pPhone").set("v.value", phone);
+                        //component.find("pPhone").set("v.value", phone);
                         }
                     if(age !== undefined){
                         this.patientAge = age;
@@ -607,7 +607,7 @@ export default class Lacunainterfacelwc extends LightningElement {
                 this.Spinner = false;
                 console.log("File List fetch Error: " + error);
                 }
-
+        this.showCaseContent = true;
         this.Spinner = false;
         }
 
@@ -795,7 +795,7 @@ export default class Lacunainterfacelwc extends LightningElement {
             }
       
         setPreferredFac(){
-            var facID = event.targer.text;
+            var facID = event.target.text;
             var state = event.target.value;
             var name = event.target.name;
             if(state === true){
@@ -811,7 +811,7 @@ export default class Lacunainterfacelwc extends LightningElement {
         recenterMap(){
             var proceed = this.formReady;
             if(proceed === true){
-            var map = component.find("mapComponent");
+            //var map = component.find("mapComponent");
             var loc = event.target.title;
           
             var cityAddr = loc.City;
@@ -821,7 +821,7 @@ export default class Lacunainterfacelwc extends LightningElement {
               
             var repList = this.locationDetails;
             console.log('Resetting Map');
-            var mapComponent = component.find('mapComponent');
+            /*var mapComponent = component.find('mapComponent');
                             if(mapComponent && mapContainer !== undefined){
                                 mapComponent.destroy();
                                 }
@@ -840,7 +840,7 @@ export default class Lacunainterfacelwc extends LightningElement {
                                     State: stateAddr,
                                     Street: streetAddr
                                 }
-                            };
+                            };*/
                   
                     if(center !== undefined && repList !== undefined){
                             /*$A.createComponent(
@@ -1135,7 +1135,7 @@ export default class Lacunainterfacelwc extends LightningElement {
                     this.activeCase.Origin = event.target.value;
                     }
                 else if(event.target.name === 'inputSelectCallType'){
-                    this.activeCase.Call_Type__c = event.targer.value;
+                    this.activeCase.Call_Type__c = event.target.value;
                     }
                 else if(event.target.name === 'inputEmailStatus'){
                     var eStatus = event.target.value;
@@ -1335,7 +1335,7 @@ export default class Lacunainterfacelwc extends LightningElement {
             this.Spinner = true;
           
             var locListCheck = this.activeAccount.Type;
-            if(locListCheck.length === 0 || locListCheck === undefined || locListCheck === null || locListCheck === '--None--'){
+            if(locListCheck === undefined || locListCheck === null || locListCheck === '--None--'){
                 proceed = false;
                 alert('A level of care must be provided to proceed.  If the case does not directly apply to a service, please select Not Applicable.');
                 }
@@ -1347,27 +1347,27 @@ export default class Lacunainterfacelwc extends LightningElement {
             var caseOriginCheck = this.activeCase.Origin;
            
             console.log('caseSourceCheck');
-            if(caseSourceCheck.length === 0 || caseSourceCheck === undefined || caseSourceCheck === null || caseSourceCheck === '--None--'){
+            if(caseSourceCheck === undefined || caseSourceCheck === null || caseSourceCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the How did caller find Kindred? question.  Check the form entry for this item and try again.');
                 }
             console.log('webAdAskCheck');
-            if(webAdAskCheck.length === 0 || webAdAskCheck === undefined || webAdAskCheck === null || webAdAskCheck === '--None--'){
+            if(webAdAskCheck === undefined || webAdAskCheck === null || webAdAskCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the Have you seen one of our ads on a website? question.  Check the form entry for this item and try again.');
                 }
             console.log('tvAdAskCheck');
-            if(tvAdAskCheck.length === 0 || tvAdAskCheck === undefined || tvAdAskCheck === null || tvAdAskCheck === '--None--'){
+            if(tvAdAskCheck === undefined || tvAdAskCheck === null || tvAdAskCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the Have you seen our TV advertising? question.  Check the form entry for this item and try again.');
                 }
             console.log('onlineSearchAskCheck');
-           if(onlineSearchAskCheck.length === 0 || onlineSearchAskCheck === undefined || onlineSearchAskCheck === null || onlineSearchAskCheck === '--None--'){
+           if(onlineSearchAskCheck === undefined || onlineSearchAskCheck === null || onlineSearchAskCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the Have you seen us show up in an online search? question.  Check the form entry for this item and try again.');
                 }
             console.log('caseOriginCheck');
-            if(caseOriginCheck.length === 0 || caseOriginCheck === undefined || caseOriginCheck === null || caseOriginCheck === '--None--'){
+            if(caseOriginCheck === undefined || caseOriginCheck === null || caseOriginCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the Case Origin field.  Check the form entry for this item and try again.');
                 }
@@ -1394,7 +1394,7 @@ export default class Lacunainterfacelwc extends LightningElement {
           
             var cType = this.activeCase.Type;
             console.log('cType: ' + cType);
-                if(cType.length === 0 || cType === undefined || cType === null || cType === '--None--'){
+                if(cType === undefined || cType === null || cType === '--None--'){
                     proceed = false;
                     alert('Case Type must be provided.');
                     }
@@ -1407,7 +1407,7 @@ export default class Lacunainterfacelwc extends LightningElement {
           
             var cSType = this.activeCase.Subtype__c;
             console.log('cSType: ' + cSType);
-                if(cSType.length === 0 || cSType === undefined || cSType === null || cSType === '--None--'){
+                if(cSType === undefined || cSType === null || cSType === '--None--'){
                     proceed = false;
                     alert('Case Subtype must be provided.');
                     }
@@ -1421,14 +1421,14 @@ export default class Lacunainterfacelwc extends LightningElement {
           
             var cCType = this.activeCase.Call_Type__c;
             console.log('cCType: ' + cCType);
-                if(cCType.length === 0 || cCType === undefined || cCType === null || cCType === '--None--'){
+                if(cCType === undefined || cCType === null || cCType === '--None--'){
                     proceed = false;
                     alert('Case Call Type must be provided.');
                     }
           
             var cLastName = this.activeContact.LastName;
             console.log('cLastName: ' + cLastName);
-                if(cLastName.length === 0 || cLastName === undefined || cLastName === 'temp' || cLastName === null || cLastName === 'Last Name'){
+                if(cLastName === undefined || cLastName === 'temp' || cLastName === null || cLastName === 'Last Name'){
                     proceed = false;
                     alert('Contact Last Name must be provided.');
                     }
@@ -1470,17 +1470,17 @@ export default class Lacunainterfacelwc extends LightningElement {
                     var ptStatusD = this.activePatient.Status_Detail__c;
                     console.log('ptStatus: ' + ptStatus);
                     console.log('ptStatusD: ' + ptStatusD);
-                    if(lastName.length === 0 || lastName === null || lastName === undefined || lastName === 'temp'){
+                    if(lastName === null || lastName === undefined || lastName === 'temp'){
                         proceed = false;
                         console.log('Patient LName');
                         alert('Patient Last Name must be filled in to proceed when case Subtype is Service Recommendation or Lead.  Check entries.');
                         }
-                    if(ptStatus.length === 0 || ptStatus === null || ptStatus === undefined || ptStatus === '--None--'){
+                    if(ptStatus === null || ptStatus === undefined || ptStatus === '--None--'){
                         proceed = false;
                         console.log('Patient Status');        
                         alert('Patient Status must be filled in to proceed when case Subtype is Service Recommendation or Lead.  Check entries.');
                         }
-                    if(ptStatusD.length === 0 || ptStatusD === null || ptStatusD === undefined || ptStatusD === '--None--'){
+                    if(ptStatusD === null || ptStatusD === undefined || ptStatusD === '--None--'){
                         proceed = false;
                         console.log('Patient Status Detail');
                         alert('Patient Status Detail must be filled in to proceed when case Subtype is Service Recommendation or Lead.  Check entries.');
@@ -1571,7 +1571,7 @@ export default class Lacunainterfacelwc extends LightningElement {
                 this.activeContact.Account = this.activeAccount.Id;
           
                 //Account
-               console.log('Submitting Account Set');
+                console.log('Submitting Account Set');
                 console.log("pt and assess: " + pt + ", " + assess);
                 if(pt !== null && pt !== undefined && pt !== 'temp'){
                 //Patient
@@ -1615,7 +1615,7 @@ export default class Lacunainterfacelwc extends LightningElement {
             this.Spinner = true;
           
             var locListCheck = this.activeAccount.Type;
-            if(locListCheck.length === 0 || locListCheck === undefined || locListCheck === null || locListCheck === '--None--'){
+            if(locListCheck === undefined || locListCheck === null || locListCheck === '--None--'){
                 proceed = false;
                 alert('A level of care must be provided to proceed.  If the case does not directly apply to a service, please select Not Applicable.');
                 }
@@ -1627,27 +1627,27 @@ export default class Lacunainterfacelwc extends LightningElement {
             var caseOriginCheck = this.activeCase.Origin;
            
             console.log('caseSourceCheck');
-            if(caseSourceCheck.length === 0 || caseSourceCheck === undefined || caseSourceCheck === null || caseSourceCheck === '--None--'){
+            if(caseSourceCheck === undefined || caseSourceCheck === null || caseSourceCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the How did caller find Kindred? question.  Check the form entry for this item and try again.');
                 }
             console.log('webAdAskCheck');
-            if(webAdAskCheck.length === 0 || webAdAskCheck === undefined || webAdAskCheck === null || webAdAskCheck === '--None--'){
+            if(webAdAskCheck === undefined || webAdAskCheck === null || webAdAskCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the Have you seen one of our ads on a website? question.  Check the form entry for this item and try again.');
                 }
             console.log('tvAdAskCheck');
-            if(tvAdAskCheck.length === 0 || tvAdAskCheck === undefined || tvAdAskCheck === null || tvAdAskCheck === '--None--'){
+            if(tvAdAskCheck === undefined || tvAdAskCheck === null || tvAdAskCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the Have you seen our TV advertising? question.  Check the form entry for this item and try again.');
                 }
             console.log('onlineSearchAskCheck');
-            if(onlineSearchAskCheck.length === 0 || onlineSearchAskCheck === undefined || onlineSearchAskCheck === null || onlineSearchAskCheck === '--None--'){
+            if(onlineSearchAskCheck === undefined || onlineSearchAskCheck === null || onlineSearchAskCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the Have you seen us show up in an online search? question.  Check the form entry for this item and try again.');
                 }
             console.log('caseOriginCheck');
-            if(caseOriginCheck.length === 0 || caseOriginCheck === undefined || caseOriginCheck === null || caseOriginCheck === '--None--'){
+            if(caseOriginCheck === undefined || caseOriginCheck === null || caseOriginCheck === '--None--'){
                 proceed = false;
                 alert('A response is required for the Case Origin field.  Check the form entry for this item and try again.');
                 }
@@ -1674,7 +1674,7 @@ export default class Lacunainterfacelwc extends LightningElement {
           
             var cType = this.activeCase.Type;
             console.log('cType: ' + cType);
-                if(cType.length === 0 || cType === undefined || cType === null || cType === '--None--'){
+                if(cType === undefined || cType === null || cType === '--None--'){
                     proceed = false;
                     alert('Case Type must be provided.');
                     }
@@ -1687,7 +1687,7 @@ export default class Lacunainterfacelwc extends LightningElement {
           
             var cSType = this.activeCase.Subtype__c;
             console.log('cSType: ' + cSType);
-                if(cSType.length === 0 || cSType === undefined || cSType === null || cSType === '--None--'){
+                if(cSType === undefined || cSType === null || cSType === '--None--'){
                     proceed = false;
                     alert('Case Subtype must be provided.');
                     }
@@ -1701,14 +1701,14 @@ export default class Lacunainterfacelwc extends LightningElement {
            
             var cCType = this.activeCase.Call_Type__c;
             console.log('cCType: ' + cCType);
-                if(cCType.length === 0 || cCType === undefined || cCType === null || cCType === '--None--'){
+                if(cCType === undefined || cCType === null || cCType === '--None--'){
                     proceed = false;
                     alert('Case Call Type must be provided.');
                     }
           
             var cLastName = this.activeContact.LastName;
             console.log('cLastName: ' + cLastName);
-                if(cLastName.length === 0 || cLastName === undefined || cLastName === 'temp' || cLastName === null || cLastName === 'Last Name'){
+                if(cLastName === undefined || cLastName === 'temp' || cLastName === null || cLastName === 'Last Name'){
                     proceed = false;
                     alert('Contact Last Name must be provided.');
                     }
@@ -1750,17 +1750,17 @@ export default class Lacunainterfacelwc extends LightningElement {
                     var ptStatusD = this.activePatient.Status_Detail__c;
                     console.log('ptStatus: ' + ptStatus);
                     console.log('ptStatusD: ' + ptStatusD);
-                    if(lastName.length === 0 || lastName === null || lastName === undefined || lastName === 'temp'){
+                    if(lastName === null || lastName === undefined || lastName === 'temp'){
                         proceed = false;
                         console.log('Patient LName');
                         alert('Patient Last Name must be filled in to proceed when case Subtype is Service Recommendation or Lead.  Check entries.');
                         }
-                    if(ptStatus.length === 0 || ptStatus === null || ptStatus === undefined || ptStatus === '--None--'){
+                    if(ptStatus === null || ptStatus === undefined || ptStatus === '--None--'){
                         proceed = false;
                         console.log('Patient Status');        
                         alert('Patient Status must be filled in to proceed when case Subtype is Service Recommendation or Lead.  Check entries.');
                         }
-                    if(ptStatusD.length === 0 || ptStatusD === null || ptStatusD === undefined || ptStatusD === '--None--'){
+                    if(ptStatusD === null || ptStatusD === undefined || ptStatusD === '--None--'){
                         proceed = false;
                         console.log('Patient Status Detail');
                         alert('Patient Status Detail must be filled in to proceed when case Subtype is Service Recommendation or Lead.  Check entries.');
@@ -1903,45 +1903,48 @@ export default class Lacunainterfacelwc extends LightningElement {
       
         getContent(){
             this.showModalSearch = true;
-            helper.getSelectedContent(component);
+            this.getSelectedContent();
             }
       
-        filterArticles(){
+        filterArticles(event){
             var arType = event.target.name;
-            var art = this.template.querySelectorAll(".art");
-            
+            var art = this.template.querySelectorAll(".article");
+            console.log('arType: ' + arType);
             if(arType === 'Kindred'){
+                this.articleTypeFilter = 'kindredKnowledgeBase';
                 art.forEach(function(element){
-                    if(element.name === 'allKnowledgeBase'){
+                    console.log('elementName: ' + element.name);
+                    if(element.name === 'All'){
                         element.checked = false;
                         }
-                    else if(element.name === 'gentivaKnowledgeBase'){
+                    else if(element.name === 'Gentiva'){
                         element.checked = false;
                         }
                     }, this);
                 }
             else if(arType === 'Gentiva'){
+                this.articleTypeFilter = 'gentivaKnowledgeBase';
                 art.forEach(function(element){
-                    if(element.name === 'allKnowledgeBase'){
+                    if(element.name === 'All'){
                         element.checked = false;
                         }
-                    else if(element.name === 'kindredKnowledgeBase'){
+                    else if(element.name === 'Kindred'){
                         element.checked = false;
                         }
                     }, this);
                 }
             else if(arType === 'All'){
+                this.articleTypeFilter = 'allKnowledgeBase';
                 art.forEach(function(element){
-                    if(element.name === 'gentivaKnowledgeBase'){
+                    if(element.name === 'Gentiva'){
                         element.checked = false;
                         }
-                    else if(element.name === 'kindredKnowledgeBase'){
+                    else if(element.name === 'Kindred'){
                         element.checked = false;
                         }
                     }, this);
                 }
             console.log('Radio Value: ' + arType);
-            this.articleTypeFilter = arType;
             this.findArticles();
             }
       
@@ -2036,7 +2039,6 @@ export default class Lacunainterfacelwc extends LightningElement {
           
             submitItemsForSave(){
                 this.Spinner = true;
-                var action = component.get("c.processSaveItems");
                 processSaveItems({
                     "activeCase" : this.activeCase,
                     "activeContact" : this.activeContact,

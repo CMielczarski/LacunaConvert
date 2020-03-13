@@ -632,7 +632,7 @@
                                           object-api-name="Case"
                                           id="editForm3"
                                           record-type-id={activeCase.RecordTypeId}>
-                    <template if:true={showCaseDetails}>
+                    <template if:true={showCaseContent}>
                         <table>
                             <tr>
                                 <td style="width: 200px">
@@ -651,7 +651,7 @@
                                                               object-api-name="Account"
                                                               id="editForm4"
                                                               record-type-id={activeAccount.RecordTypeId}>
-                                        
+                                            <br/>
                                             <lightning-formatted-text value="Level of Care" class="customRequired"></lightning-formatted-text>
                                             <br/>
                                             <select class="slds-select" name="accType" onchange={handleFormInputChange} >
@@ -704,20 +704,24 @@
                             <tr class="slds-text-title--caps">
                                 <th scope="row">
                                     <span title="Name">Title</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                 </th>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                
                                 <th scope="row">
                                     <span title="Name">Content</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                 </th>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                
                                 <th scope="row">
                                     <span title="Name">Created Date</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                 </th>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                
                                 <th scope="row">
                                     <span title="Name">Created By</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                 </th>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                
                                 <th scope="row">
                                     <span title="Name">Last Modified</span>
                                 </th>
@@ -728,20 +732,24 @@
                                     <tr key={add.Id}>
                                         <th scope="row">
                                             <div class="slds-truncate" ><lightning-formatted-text value={add.n.Title}></lightning-formatted-text></div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
                                         </th>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        
                                         <th scope="row">
                                             <div class="slds-truncate" style="width:125px"><lightning-formatted-text value={add.n.TextPreview}></lightning-formatted-text></div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
                                         </th>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        
                                         <th scope="row">
                                             <div class="slds-truncate" ><lightning-formatted-date-time value={add.n.CreatedDate} format="MM/dd/yyyy"></lightning-formatted-date-time></div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
                                         </th>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        
                                         <th scope="row">
                                             <div class="slds-truncate" ><lightning-formatted-text value={add.userName}></lightning-formatted-text></div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
                                         </th>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        
                                         <th scope="row">
                                             <div class="slds-truncate"><lightning-formatted-date-time value={add.n.LastModifiedDate} format="MM/dd/yyyy hh:mm a z"></lightning-formatted-date-time></div>
                                         </th>
@@ -925,13 +933,13 @@
                     <table>
                         <tr>
                             <td>
-                                <label style ="font-weight: 400;"><lightning-input type="radio" name="allKnowledgeBase" value="true" change={filterArticles} class="art"></lightning-input>All</label>
+                                <label style ="font-weight: 400;"><lightning-input type="radio" name="All" value="true" onclick={filterArticles} class="article"></lightning-input>All</label>
                             </td>
                             <td>
-                                <label style ="font-weight: 400;"><lightning-input type="radio" name="kindredKnowledgeBase" change={filterArticles} class="art"></lightning-input>Kindred</label>
+                                <label style ="font-weight: 400;"><lightning-input type="radio" name="Kindred" onclick={filterArticles} class="article"></lightning-input>Kindred</label>
                             </td>
                             <td>
-                                <label style ="font-weight: 400;"><lightning-input type="radio" name="gentivaKnowledgeBase" change={filterArticles}  class="art"></lightning-input>Gentiva</label>
+                                <label style ="font-weight: 400;"><lightning-input type="radio" name="Gentiva" onclick={filterArticles}  class="article"></lightning-input>Gentiva</label>
                             </td>
                         </tr>
                     </table>
